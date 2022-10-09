@@ -7,9 +7,33 @@
 // "prototype property" is available to "Function/Constructor Function" e.g. function findById() {} / function Games () {}
 // class itself not its instance i.e. class Games {} & every other built in object e.g. Object, Array, String, Number, Boolean, Map, Set
 
+let object = {
+  name: "John",
+  city: "Boston",
+  greet: function () {
+    console.log(`${this.name} person is from ${this.city}`);
+  }
+}
+
+let object2 = { name: "Jones" };
+
+// never do it like this : here copying the properties/methods i.e. object's prototype to object2 so that object2 can he same properties/methods
+object2.__proto__ = object;
+console.log(object2["__proto__"]);
+console.log(object2.name); // it has name property thus it'll be "Jones" not "John"
+console.log(object2.greet()); // Jones is from Boston
+
+// this is what called Prototypal inheritance
+
+
 const person = {
   hobby: "Gaming"
 };
+console.log(Object.prototype === person.__proto__); // same
+console.log(person.__proto__.toString() === person.toString()); // same
+
+// every object has a prototype so person has its own prototype i.e. person.__proto__ & person.__proto__.__proto__ = this here refers to Object.prototype  then it will be null
+
 
 const musician = {
   plays: true

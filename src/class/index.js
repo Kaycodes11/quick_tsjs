@@ -1,5 +1,5 @@
 // class, getter, setter, modifiers, inheritance, encapsulation, polymorphism, abstraction
-// this is a syntatic sugar/easier way to do a make prototype & prototypal inheritance
+// this is a syntactic sugar/easier way to do a make prototype & prototypal inheritance
 
 class Movies {
   #title = `Good movies`;
