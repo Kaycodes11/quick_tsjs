@@ -2,7 +2,7 @@
 
 Everything in JS happens inside an Execution Context.
 
-The execution context comprises of 2 things:
+The execution context consist of 2 things:
 
 1. Memory Component also known as Variable Environment - This is where the variables and their values are stored as key:value pairs, this also stores the functions
 
@@ -297,11 +297,66 @@ gets pushed first to call stack than `callback queue`
 
 ## js engine: intetpretter, compiler
 
+JS engine is nothing but a piece of code that's written with c++, that takes high level code we write and compile to "bytecode / machine-level" code.
 
+JS engine takes the code & do the following things::
+
+i) parsing : here the code broken down to token, then "syntax parser" generaters ast refer to astexplorer.net, now this generated "ast" goes to the compilation 
+
+ii) compilation - execution: both goes hand in hand
+
+interpreter: an interpreter reads code like fromt the first then executes that then goes to next line and follows.
+
+pros: initially fast
+cons: bundle/executable size is bigger
+
+compiler: the compiler compiles the whole code first & spits out the an optimized version of the code then execute.
+
+pros: the code is optimized and bundle/executable size is less
+cons: the initial compilation is time-consuming
+
+# JIT compilation
+JS uses both interpreter & compiler both known as "JIT compiler" to execute the code. So, after getting the "AST", it goes to interpretter then interpretter takes that relatively "high-level" code and turn it to "bytecode" and then "bytecode" move to "execution" step. But while it's executing the code it takes help from 
+"compiler" to optimize the code, so basically while interpretter reading code line by line the compiler tries
+to optimize the code as much as it can. So, the job of the compiler here is to simply optimize the code at runtime as much as possible thus known as JIT (JUST IN TIME) compilation.
+
+# AOT compilation
+some JS engine has AOT (Ahead of time) compilation which basically takes a piece of code that gonna be executed
+later, tries to optimize as much as it can & generates bytecode which is what goes to execution thereafer.
+
+
+iii) Execution
+
+Here, it has memory heap and call stack, heap is where memory stored alongside garbage collector.
+
+now to execute the received "bytecode" it will use call stack which is within JS engine
 
 ## higher order function
 
+A function that takes function as argument or return a function is "higher order function"
 
-## asynchonous programming
 
-## prototype and protoypal inheritance
+## prototype and prototypal inheritance
+
+
+
+
+
+## asynchronous programming
+Promise is an object that represents the eventual completion of an asynchronous task
+it has mainly two properties: PromiseState["pending" | "fulfilled" | "rejected"] - PromiseResult
+
+Why do we use Promise than callback?
+
+1) Promise is immutable that means when a Promise is resolved (either "fulfilled" or "rejected"), it can't be
+changed which means "A Promise is immutable after resolved/settled".
+
+2) The then() and catch() methods of Promise are used to handle callbacks that executes when it is settled or resolved.
+
+3) it solves the issue of inversion of control and callback hell
+
+4) chainable, nesting can be done in Promises and with the help of that we can return the values in each individual chain
+
+
+
+
