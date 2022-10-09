@@ -1,12 +1,3 @@
-// __proto has to be either object or null
-
-// .__proto__ vs prototype : https://stackoverflow.com/questions/9959727/proto-vs-prototype-in-javascript
-
-// ## Both prototype and __proto__ property available on these :
-
-// "prototype property" is available to "Function/Constructor Function" e.g. function findById() {} / function Games () {}
-// class itself not its instance i.e. class Games {} & every other built in object e.g. Object, Array, String, Number, Boolean, Map, Set
-
 let object = {
   name: "John",
   city: "Boston",
@@ -34,7 +25,6 @@ console.log(person.__proto__.toString() === person.toString()); // same
 
 // every object has a prototype so person has its own prototype i.e. person.__proto__ & person.__proto__.__proto__ = this here refers to Object.prototype  then it will be null
 
-
 const musician = {
   plays: true
 };
@@ -57,6 +47,8 @@ const guitarist = {
 console.log(guitarist, guitarist.strings);
 console.log(guitarist["hobby"], guitarist["plays"]);
 
+// ---------------------------------------------------------------------------------------------------------
+
 const vehicle = {
   seats: `silk`,
   doors: 4,
@@ -76,11 +68,11 @@ luxuryVehicle.seatMaterial = "leather";
 console.log(luxuryVehicle);
 console.log(luxuryVehicle.doors);
 console.log(vehicle);
-console.log(luxuryVehicle);
-console.log(luxuryVehicle.valueOf());
+console.log(luxuryVehicle); // luxuryVehicle.valueOf() same
 
+// ---------------------------------------------------------------------------------------------------------
 
-// constructors
+// constructor function
 function Animal(species) {
   this.species = species;
   this.eats = true;
@@ -140,15 +132,16 @@ valueOf: function valueOf()
 }
 */
 
+// ---------------------------------------------------------------------------------------------------------
 
 const oo = {
   a: 1,
   b: 2,
   __proto__: { g: 10, f: 5 }
 };
-
-console.log(oo, oo.__proto__.prototype);
-console.log(oo["f"], oo["g"]);
+// oo = {a: 1, b: 2} and the value avaible from its prototype/__proto__ is = {g: 10, f: 5}
+console.log(oo, oo["f"]);
+console.log(oo.__proto__)
 
 const o = {
   a: 1,
@@ -208,7 +201,7 @@ Box.prototype.getValue = function () {
 const box1 = new Box(1);
 const box2 = new Box(2)
 
-// whatever Box's prototype ; is same available to box1/box2 ? yes
+// Box's value assigned to prototype of  box1, box2 then true else false
 console.log(Box.prototype.isPrototypeOf(box1));
 console.log(Box.prototype.isPrototypeOf(box2));
 
@@ -216,37 +209,8 @@ console.log(Box.prototype.isPrototypeOf(box2));
 const boxes = [ new Box(1), new Box(2) ]
 console.log(boxes);
 
-// every instance made from constructor function will have constructor's prototype,
-
-// const bx = {
-//   constructor: {
-//     arguments: null,
-//     name: "Box",
-//     length: 1,
-//     prototype: {  },
-//     <prototype>: Function
-//   },
-//   getValue: function () {},
-//   <prototype>: Object
-// }
 
 console.log(Object.getPrototypeOf(new Box()) === Box.prototype);
 console.log(box2.__proto__.constructor.prototype);
-
-
-// function Foo() {}
-// function Bar() {}
-//
-// Bar.prototype = Object.create(Foo.prototype);
-//
-// const bar = new Bar();
-//
-// // whatever `Bar` has is same available to bar? yes
-// console.log(Bar.prototype.isPrototypeOf(bar));
-// // whatever `Foo` has is same available to bar ? yes referring to line 195
-// console.log(Foo.prototype.isPrototypeOf(bar));
-
-
-
 
 

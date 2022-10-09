@@ -1,3 +1,7 @@
+// when invoked a function can keep track of its argument/arguments
+// when inner function uses variable from outer function, even when outer fn has popped off from stack the inner fn can keep tack of it
+
+
 function countdown(value) {
   if (value > 0) {
     console.log(value);

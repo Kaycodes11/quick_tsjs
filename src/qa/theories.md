@@ -411,3 +411,8 @@ as html parsing line by line when it sees a script tag it doesn't pause html par
 
 
 [//]: # (https://www.youtube.com/watch?v=IrHmpdORLu8)
+
+
+# localStorage vs sessionStorage
+
+# debounce/throttle and memoization
