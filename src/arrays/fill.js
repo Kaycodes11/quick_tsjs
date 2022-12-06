@@ -11,6 +11,9 @@ console.log(array1.fill(5, 1));
 console.log(array1.fill(6));
 // expected output: [6, 6, 6, 6]
 
+console.log(new Array(10).fill(11));
+console.log(Array.from(Array(10)).fill(11));
+
 
 // [1, 2, 3].fill(4)                // [4, 4, 4]
 //   [1, 2, 3].fill(4, 1)             // [1, 4, 4]
@@ -29,7 +32,7 @@ arr[0].hi = "hi"            // [{ hi: "hi" }, { hi: "hi" }, { hi: "hi" }]
 
 
 const arr = new Array(3);
-for (let i=0; i<arr.length; i++) {
+for (let i = 0; i < arr.length; i++) {
   arr[i] = new Array(4).fill(1); // Creating an array of size 4 and filled of 1
 }
 arr[0][0] = 10;
@@ -38,5 +41,5 @@ console.log(arr[1][0]); // 1
 console.log(arr[2][0]); // 1
 
 
-let tempGirls = Array(5).fill("girl",0);
+let tempGirls = Array(5).fill("girl", 0);
 console.log(tempGirls);
