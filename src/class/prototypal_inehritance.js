@@ -25,6 +25,8 @@ console.log(person.__proto__.toString() === person.toString()); // same
 
 // every object has a prototype so person has its own prototype i.e. person.__proto__ & person.__proto__.__proto__ = this here refers to Object.prototype  then it will be null
 
+// basically means person.prototype refers to person's properties/methods where person.__proto__ refers to its parent prototype
+
 const musician = {
   plays: true
 };
