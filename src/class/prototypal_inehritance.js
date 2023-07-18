@@ -141,7 +141,7 @@ const oo = {
   b: 2,
   __proto__: { g: 10, f: 5 }
 };
-// oo = {a: 1, b: 2} and the value avaible from its prototype/__proto__ is = {g: 10, f: 5}
+// oo = {a: 1, b: 2} and the value available from its prototype/__proto__ is = {g: 10, f: 5}
 console.log(oo, oo["f"]);
 console.log(oo.__proto__)
 

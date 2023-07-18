@@ -1,9 +1,9 @@
-## declrative programming: 
+## declarative programming:  
 just tell me what to do whereas imperative programming is about what & how to do. forEach declarative vs for loop is imperative
 
 ## pure function : given the same input it'll return the same output
 
-basically, it can only work on the data that's given to the very function itself, it can't work on any external data. it is solely depends upon input. Any variable, function that's being used withtin then if that's not given as input then it wouln't be pure function
+basically, it can only work on the data that's given to the very function itself, it can't work on any external data. it is solely depends upon input. Any variable, function that's being used within then if that's not given as input then it wouldn't be pure function.
 
 ```javascript
 
@@ -23,9 +23,7 @@ function add (x, y) {
 ```
 
 ## immutability
-Rather than modifying/mutating data directly from source, use immutable methods
-
-
+Rather than modifying/mutating data directly from source, use the immutable methods
 
 ## side effects and pure function
 
@@ -42,5 +40,3 @@ a side effect when function relies on, or modifies something outside its paramet
 ## partial
 
 ## lodash ramda
-
-

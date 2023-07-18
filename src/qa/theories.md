@@ -26,21 +26,21 @@ square4: undefined
 Memory/variable | code/thread of execution
 title: "Fifa"  
 square: (){} already stored in memory  
-square2: undefined | as function invoked; it makes its own new function execution context & since it's an execution context it'll have those two components to allocate memory with a special default value if used var delcaration i.e. `undefined` and then when running code line by line as it gets the actual value then simply update that to its memory location.
+square2: undefined | as function invoked; it makes its own new function execution context & since it's an execution context it'll have those two components to allocate memory with a special default value if used var declaration i.e. `undefined` and then when running code line by line as it gets the actual value then simply update that to its memory location.
 square4: undefined
 
 after the function's execution done and value saved to required place its own function execution context gets automatically deleted
 
-1. When JavaScript code is executed, Execution Context is created, and it
+1. When JavaScript code is executed, An Execution Context is created, and it
    is called Global Execution Context.
 
 2. JavaScript program is executed in TWO PHASES inside Execution Context
-   a. MEMORY ALLOCATION PHASE - JavaScript program goes throughout the program and allocate memory of Variables and Functions declared in program.
+   a. MEMORY ALLOCATION PHASE - JavaScript program goes throughout the program and allocate memory to Variables and Functions declared in program.
    b. CODE EXECUTION PHASE - JavaScript program now goes throughout the code line by line and execute the code.
 
 3. A Function is invoked when it is called, and it acts as another MINI PROGRAM and creates its own Execution Context.
 
-4. Returns keyword return the Control back to the PREVIOUS Execution-Context where the Function is called and Execution Context of the Function is DELETED.
+4. Returns keyword return the Control back to where the Function is invoked
 
 5. CALL STACK maintains the ORDER of execution Contexts. It CREATES Execution Context whenever a Program starts or a Function is invoked and it pops out the Execution Context when a Function or Program ENDS.
 
@@ -77,8 +77,7 @@ console.log("JavaScript great");
 
 console.log(x); // 5
 
-console.log(getName2());// undefined [it's treated as variable declaration]
-note that calling getName() i.e. undefined() will throw a TypeError "getName2 is not a function" which totally makes sense
+console.log(getName2());// undefined [it's treated as variable declaration so `TypeError if invoked before assignment`]
 
 var getName2 = () => console.log('JS');
 
@@ -248,7 +247,7 @@ console.log('button clicked', ++count);
 })
 }
 
-## event loop : callback microtask queue
+## event loop : callback queue vs microtask queue
 
 Whenever any JS program run, GEC created then it pushed within call stack
 then when no code to run GEC also get popped off from the stack.
@@ -258,8 +257,7 @@ setTimeout/setInterval,
 dom apis
 fetch()
 localStorage
-console
-location
+
 
 how addEventListener works behind the scene?
 console.log('start');
@@ -270,32 +268,12 @@ console.log('callback function');
 
 console.log('end');
 
+<!-- https://stackoverflow.com/questions/49264524/where-do-the-browser-web-apis-run-in-javascript -->
+
 explain:
 
-so as run this lines of code; JS engines creates GEC and pushed to call
-stack then register the callback function with click attached then move to
-the next line log 'end' and its does and GEC popped off from call stack
-while register callback still siting within web api environment
-
-now when user click on the button with "button" id the register callback
-function that was sitting within `webapi environment` goes to `callback queue` and wait there while event loop checks whether if call stack is empty and so when call stack empty the function gets puhsed to stack and then function gets executed line by line and when done popped off.
-
--- why callback queue or task queue is needed?
-JS engine has one call stack, and it does one thing at a time, so if user
-frequently click multiple times the stack could get filled multiple cb
-functions but with `callback queue` it does one at a time one by one to stack.
-
-fetch('https://api.netflix.com').then(function getNetflix (data) {})
-similarly, when called it goes web api environment and doesn't block the
-main thread of execution so when it gets the data from server then it's
-registered cb fn `getNetflix` comes to `callback queue` then `event loop`
-checks the call stack if its empty it pushes the function to the stack.
-
--- Microtask queue: network calls goes here i.e. Promise values
-This queue has higher priority so whatever comes within these queue,
-gets pushed first to call stack than `callback queue`
-
 ## js engine: interpreter, compiler
+
 
 JS engine is nothing but a piece of code that's written with c++, that takes high level code we write and compile to "bytecode / machine-level" code.
 
@@ -312,17 +290,14 @@ cons: bundle/executable size is bigger
 
 compiler: the compiler compiles the whole code first & spits out the optimized version of the code then execute.
 
-pros: the code is optimized and bundle/executable size is fewer
+pros: the code is optimized and bundle/executable size is smaller
 cons: the initial compilation is time-consuming
 
 # JIT compilation
-JS uses both interpreter & compiler both known as "JIT compiler" to execute the code. So, after getting the "AST", it goes to interpretter then interpretter takes that relatively "high-level" code and turn it to "bytecode" and then "bytecode" move to "execution" step. But while it's executing the code it takes help from 
-"compiler" to optimize the code, so basically while interpreter reading code line by line the compiler tries
-to optimize the code as much as it can. So, the job of the compiler here is to simply optimize the code at runtime as much as possible thus known as JIT (JUST IN TIME) compilation.
+JS uses both interpreter & compiler both known as "JIT compiler" to execute the code. So, after getting the "AST", it goes to interpreter then interpreter takes that relatively "high-level" code and turn it to "bytecode" and then "bytecode" move to "execution" step. But while it's executing the code it takes help from "compiler" to optimize the code, so basically while interpreter reading code line by line the compiler tries to optimize the code as much as it can. So, the job of the compiler here is to simply optimize the code at runtime as much as possible thus known as JIT (JUST IN TIME) compilation.
 
 # AOT compilation
-some JS engine has AOT (Ahead of time) compilation which basically takes a piece of code that's going to be executed
-later, tries to optimize as much as it can & generates bytecode which is what goes to execution thereafter.
+some JS engine has AOT (Ahead of time) compilation which basically takes a piece of code that's going to be executed later, tries to optimize as much as it can & generates bytecode which is what goes to execution thereafter.
 
 
 iii) Execution
@@ -338,7 +313,7 @@ A function that takes function as argument or return a function is "higher order
 
 ## prototype and prototypal inheritance
 
-Everything is an object within Javascript
+"Everything is an object within Javascript"
 
 # OBJECT
 
@@ -396,14 +371,14 @@ async/await is just syntactic sugar over Promise, and it makes the code more syn
 
 ## loading javascript within html: async vs defer
 
-# <script src=""></script>: normal 
+# <script src=""></script>: blocking 
 
 with this as html parsing line by
 as html parsing line by line when it sees a <script> tag it pauses the html parsing, download the javascript then executes that, and then it resumes html parsing 
 
 
 # <script async src=""></script>: async
-as html parsing line by line when it sees a script tag it doesn't pause html parsing while javascript downloaded parallelly at background, then when javascript downloaded whether its before html parsing is done or after, it will totally stop the html parsing to execute the script and then HTML resumes parsing again.  
+as html parsing line by line when it sees a script tag it doesn't pause html parsing while javascript downloaded parallely at background, then when javascript downloaded whether its before html parsing is done or after, it will totally stop the html parsing to execute the script and then HTML resumes parsing again.  
 
 
 # <script defer src=""></script> : defer
