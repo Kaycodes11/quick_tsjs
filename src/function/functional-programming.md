@@ -29,14 +29,11 @@ Rather than modifying/mutating data directly from source, use the immutable meth
 
 a side effect when function relies on, or modifies something outside its parameters to do something. like console.log or reading/writing data from a variable outside of function's arguments.
 
-
-## composition
-
-
-## pipe compose
-
 ## curry
 
 ## partial
+## pipe compose
+
+## composition
 
 ## lodash ramda

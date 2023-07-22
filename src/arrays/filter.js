@@ -1,6 +1,7 @@
-const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+// mutable
+const words1 = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
 
-const result = words.filter(word => word.length > 6);
+const result = words1.filter(word => word.length > 6);
 
 console.log(result);
 // expected output: Array ["exuberant", "destruction", "present"]
@@ -24,7 +25,7 @@ function isPrime(num) {
   return num > 1;
 }
 
-console.log(array.filter(isPrime)); // [2, 3, 5, 7, 11, 13]
+array.filter(isPrime); // [2, 3, 5, 7, 11, 13]
 
 
 let arr = [
@@ -64,17 +65,17 @@ let fruits = ['apple', 'banana', 'grapes', 'mango', 'orange']
 /**
  * Filter array items based on search criteria (query)
  */
-function filterItems(arr, query) {
+function filterItems1(arr, query) {
   return arr.filter(function(el) {
     return el.toLowerCase().includes(query.toLowerCase());
   })
 }
 
-console.log(filterItems(fruits, 'ap'))  // ['apple', 'grapes']
-console.log(filterItems(fruits, 'an'))  // ['banana', 'mango', 'orange']
+console.log(filterItems1(fruits, 'ap'))  // ['apple', 'grapes']
+console.log(filterItems1(fruits, 'an'))  // ['banana', 'mango', 'orange']
 
 
-const fruits = ['apple', 'banana', 'grapes', 'mango', 'orange']
+const fruits1 = ['apple', 'banana', 'grapes', 'mango', 'orange']
 
 /**
  * Filter array items based on search criteria (query)
@@ -83,8 +84,8 @@ const filterItems = (arr, query) => {
   return arr.filter((el) => el.toLowerCase().includes(query.toLowerCase()));
 }
 
-console.log(filterItems(fruits, 'ap'))  // ['apple', 'grapes']
-console.log(filterItems(fruits, 'an'))  // ['banana', 'mango', 'orange']
+console.log(filterItems(fruits1, 'ap'))  // ['apple', 'grapes']
+console.log(filterItems(fruits1, 'an'))  // ['banana', 'mango', 'orange']
 
 
 // Modifying each word
@@ -117,7 +118,7 @@ const deleteWords = words.filter((word, index, arr) => {
   return word.length < 6
 })
 
-console.log(deleteWords)
+console.log(deleteWords);
 // Notice 'elite' is not even obtained as it’s been popped off 'words' before filter can even get there
 // ["spray" ,"limit"]
 

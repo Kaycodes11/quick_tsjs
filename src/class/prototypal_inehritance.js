@@ -14,6 +14,52 @@ console.log(object2["__proto__"]);
 console.log(object2.name); // it has name property thus it'll be "Jones" not "John"
 console.log(object2.greet()); // Jones is from Boston
 
+function Animal(name) {
+  this.name = name;
+  this.breathe = function() {
+    console.log(`${this.name} breathes.`);
+  } 
+}
+
+function Amphibian(name) {
+  this.name = name;
+  this.swim = () => console.log(`${this.name} Swims.`);
+}
+
+// # before
+/*
+
+1. new Amphibian(); // { name: undefined, swim: () => console.log(`${this.name} Swims.`)}
+2. Amphibian.prototype:
+            name: undefined
+            swim: () => console.log()
+            [[Prototype]]:
+                         constructor: = Amphibian.prototype i.e. {constructor: f}
+                         [[Prototype]]: Object.prototype
+
+3. Amphibian.prototype.__proto__ = Object.prototype
+4. Amphibian.prototype.__proto__.__proto__ = null
+
+*/
+
+// # after
+
+/* Amphibian.prototype = new Animal("amphibian");
+
+1. Amphibian.prototype:
+        Animal:
+            name: "amphibian"
+            breathe: () => console.log()
+            [[Prototype]]:
+                         constructor: = f Animal(name)
+                         [[Prototype]]: Object.prototype
+
+2. Amphibian.prototype.__proto__ = { constructor: f Animal(name) }
+3. Amphibian.prototype.__proto__.__proto__ = Object.prototype
+4. Amphibian.prototype.__proto__.__proto__.__proto = null
+
+*/
+
 // this is what called Prototypal inheritance
 
 
@@ -98,41 +144,7 @@ console.log(Bear);
 // first, it'll look for within its properties then its own prototype i.e. o.__proto__ still not found o.__proto.__proto__ = Object's prototype
 // o.__proto__ = own prototype ; o.__proto__.__proto = Object's prototype and o.__proto__.__proto.__proto__ = null
 
-/*
-o.__proto__
-    {g: 1, f: 5}
-    prototype : Object {
-  __defineGetter__: function __defineGetter__()
-  __defineSetter__: function __defineSetter__()
-  lookupGetter__: function __lookupGetter__()
-  lookupSetter__: function __lookupSetter__()
-  proto__: Object {
-    defineGetter__: function __defineGetter__()
-    __defineSetter__: function __defineSetter__()
-    __lookupGetter__: function __lookupGetter__()
-    __lookupSetter__: function __lookupSetter__()
-    __proto__: null
-    constructor: function Object()
-    hasOwnProperty: function hasOwnProperty()
-    isPrototypeOf: function isPrototypeOf()
-    propertyIsEnumerable: function propertyIsEnumerable()
-    toLocaleString: function toLocaleString()
-    toString: function toString()
-    valueOf: function valueOf()
-  <get __proto__()>: function __proto__()
-  <set __proto__()>: function __proto__()
-}
-constructor: function Object()
-hasOwnProperty: function hasOwnProperty()
-isPrototypeOf: function isPrototypeOf()
-propertyIsEnumerable: function propertyIsEnumerable()
-toLocaleString: function toLocaleString()
-toString: function toString()
-valueOf: function valueOf()
-<get __proto__()>: function __proto__()
-<set __proto__()>: function __proto__()
-}
-*/
+
 
 // ---------------------------------------------------------------------------------------------------------
 
@@ -197,9 +209,9 @@ function Box(value) {
 }
 
 // so now any box made from Box constructor will have this "getValue method"
-Box.prototype.getValue = function () {
-  return this.value
-}
+  Box.prototype.getValue = function () {
+    return this.value
+  }
 const box1 = new Box(1);
 const box2 = new Box(2)
 
@@ -214,5 +226,3 @@ console.log(boxes);
 
 console.log(Object.getPrototypeOf(new Box()) === Box.prototype);
 console.log(box2.__proto__.constructor.prototype);
-
-

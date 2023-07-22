@@ -1,3 +1,5 @@
+// pop - push - shift - unshift = immutable
+
 // // ## pop
 // const plants = ['broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato'];
 //

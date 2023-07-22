@@ -13,7 +13,7 @@ console.log(Math.round(rounded));
 
 console.log(Math.abs(rounded));
 
-// console.log( (Math.random() * 1) * 100);
+// console.log( Math.floor((Math.random() * 1) * 100));
 // console.log( (Math.random() * 1) * 100);
 // console.log(0.5394410908807037 * 100);
 // console.log(Math.floor( (Math.random() * 1) * 100));

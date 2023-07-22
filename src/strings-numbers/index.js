@@ -6,8 +6,8 @@ console.log(value[1]);
 console.log(Array.from(value))
 console.log([...value2])
 
-// match() returns an array or null search() returns index or -1
-let text = "the rain in spain stays mainly in the plain"
+// match() returns an array or null whereas search() returns index or -1
+let text = "the rain in spain stays mainly in the plain";
 console.log(text.match('ain'));
 console.log(text.match(/ain/));
 console.log(text.match(/goku/gi));

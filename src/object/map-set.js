@@ -4,13 +4,14 @@ console.log(JSON.stringify(Object.entries([1, 2])));
 // take the 2d array and make an object from it
 console.log(Object.fromEntries(Object.entries([1, 2])));
 
-
 // Set: doesn't contain duplicate value
 function* gen() {
   yield  1;
+  return 2;
 }
 
 const s = [1, 2];
+// Set can use yielded values from generators fn; but it won't get return value from gen
 const mySet = new Set([s, ...gen()]);
 console.log(mySet);
 console.log(mySet.has("greeting"));
@@ -55,6 +56,7 @@ ws.delete(bar);
 
 console.log(ws);
 
+// -------------------------------------------------------------------------------------------
 
 // # Map : takes a 2d array and return an iterable object
 

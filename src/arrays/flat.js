@@ -1,34 +1,34 @@
-const arr1 = [0, 1, 2, [3, 4]];
+// const arr1 = [0, 1, 2, [3, 4]];
 
-console.log(arr1.flat());
-// expected output: [0, 1, 2, 3, 4]
+// console.log(arr1.flat());
+// // expected output: [0, 1, 2, 3, 4]
 
-const arr2 = [0, 1, 2, [[[3, 4]]]];
+// const arr2 = [0, 1, 2, [[[3, 4]]]];
 
-console.log(arr2.flat(2));
-// expected output: [0, 1, 2, [3, 4]]
-
-
-const arr = [1, 2, [3, 4]];
-
-// To flat single level array
-arr.flat();
-// is equivalent to
-arr.reduce((acc, val) => acc.concat(val), []);
-// [1, 2, 3, 4]
-
-// or with decomposition syntax
-const flattened = (arr) => [].concat(...arr);
+// console.log(arr2.flat(2));
+// // expected output: [0, 1, 2, [3, 4]]
 
 
-const arr = [1, 2, [3, 4, [5, 6]]];
+// const arr = [1, 2, [3, 4]];
+
+// // To flat single level array
+// arr.flat();
+// // is equivalent to
+// arr.reduce((acc, val) => acc.concat(val), []);
+// // [1, 2, 3, 4]
+
+// // or with decomposition syntax
+// const flattened = (arr) => [].concat(...arr);
+
+
+const list = [1, 2, [3, 4, [5, 6]]];
 
 // to enable deep level flatten `use recursion with reduce and concat`
 function flatDeep(arr, d = 1) {
   return d > 0 ? arr.reduce( (acc, val) => acc.concat( Array.isArray(val) ? flatDeep(val, d - 1) : val), [] ) : arr.slice();
 }
 
-flatDeep(arr, Infinity);
+flatDeep(list, Infinity);
 // [1, 2, 3, 4, 5, 6]
 
 
@@ -37,7 +37,7 @@ flatDeep(arr, Infinity);
 // also possible w/o reversing on shift/unshift, but array OPs on the end tends to be faster
 function flatten(input) {
   const stack = [...input];
-  const res = [];
+  const result = [];
   while (stack.length) {
     // pop value from stack
     const next = stack.pop();
@@ -45,65 +45,46 @@ function flatten(input) {
       // since next is an array so copy all of its elements by spread then push it to stack array
       stack.push(...next);
     } else {
-      res.push(next);
+      result.push(next);
     }
   }
   // reverse to restore input order
-  return res.reverse();
+  return result.reverse();
 }
 
-const arr = [1, 2, [3, 4, [5, 6]]];
-flatten(arr);
-// [1, 2, 3, 4, 5, 6]
+flatten([1, 2, [3, 4, [5, 6]] ] ); // [1, 2, 3, 4, 5, 6]
 
-function* flatten(array, depth) {
+function* flattenGen(array, depth) {
   if (depth === undefined) {
     depth = 1;
   }
 
   for (const item of array) {
     if (Array.isArray(item) && depth > 0) {
-      yield* flatten(item, depth - 1);
+      yield* flattenGen(item, depth - 1);
     } else {
       yield item;
     }
   }
 }
 
-const arr = [1, 2, [3, 4, [5, 6]]];
-const flattened = [...flatten(arr, Infinity)];
-// [1, 2, 3, 4, 5, 6]
+const flattenedG = [...flattenGen([1, 2, [3, 4, [5, 6]]], Infinity)]; // [1, 2, 3, 4, 5, 6]
 
+[1, 2, [3, 4]].flat(); // [1, 2, 3, 4]
 
-const arr1 = [1, 2, [3, 4]];
-arr1.flat();
-// [1, 2, 3, 4]
+[1, 2, [3, 4, [5, 6]]].flat(); // [1, 2, 3, 4, [5, 6]]
 
-const arr2 = [1, 2, [3, 4, [5, 6]]];
-arr2.flat();
-// [1, 2, 3, 4, [5, 6]]
+[1, 2, [3, 4, [5, 6]]].flat(2); // [1, 2, 3, 4, 5, 6]
 
-const arr3 = [1, 2, [3, 4, [5, 6]]];
-arr3.flat(2);
-// [1, 2, 3, 4, 5, 6]
-
-const arr4 = [1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]];
-arr4.flat(Infinity);
+[1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]].flat(Infinity);
 // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 
-const arr5 = [1, 2, , 4, 5];
-arr5.flat();
-// [1, 2, 4, 5]
+[1, 2, , 4, 5].flat(); // [1, 2, 4, 5]
 
 // # flatMap
 
-const arr1 = [1, 2, [3], [4, 5], 6, []];
-
-const flattened = arr1.flatMap(num => num);
-
-console.log(flattened);
-// expected output: Array [1, 2, 3, 4, 5, 6]
+const flattened = [1, 2, [3], [4, 5], 6, []].flatMap(num => num); // [1, 2, 3, 4, 5, 6]
 
 const arr = [1, 2, 3, 4];
 
@@ -119,9 +100,9 @@ for (let i = 0; i < n; i++){
 // [1, 2, 2, 4, 3, 6, 4, 8]
 
 
-const arr1 = [1, 2, 3, 4];
+ ;
 
-arr1.map((x) => [x * 2]);
+ [1, 2, 3, 4].map((x) => [x * 2]);
 // [[2], [4], [6], [8]]
 
 arr1.flatMap((x) => [x * 2]);
@@ -150,7 +131,7 @@ const result = a.flatMap((n) => {
   if (n < 0) return [];
   return n % 2 === 0 ? [n] : [n - 1, 1];
 });
-
+  
 // expected output: [4, 1, 4, 20, 16, 1, 18]
 
 

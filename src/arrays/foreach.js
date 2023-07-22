@@ -20,32 +20,43 @@ async function show  () {
 }
 console.log("SHOW:", show())
 
-
-
+// handing promise with for await
 async function getPostSerialized(array) {
-  for (const id of array) {
+  let result = [];
+  for await (const id of array) {
     const data = await getPost(id);
-    console.log("HERE: ", data.id);
+    // console.log("HERE: ", data.title);
+    result.push(data);
   }
-  console.log("Waiting");
+  // console.log("done");
+  return result;
 }
 
-// getPostSerialized(ids)
+getPostSerialized(ids).then((data) => {
+  data.forEach((v) => console.info(v.title));
+});
 
 
+// # handing promise with reduce
 async function getPostSerializedWithReduce(array) {
-  await array.reduce(async (acc, id, index, src) => {
-    // wait for the previous acc to resolve 
-    await acc;
+  return array.reduce(async (acc, id) => {
+    // first, wait for the previous acc to resolve
+    const prev = await acc;
     // get the next item
     const post = await getPost(id);
-    console.log(post.id)
+    // console.log(post.id);
+    return [...prev, post];
+
     // using Promise.resolve() or Promise.resolve as acc is same
-  }, Promise.resolve())
-  console.log("Waiting")
+  }, Promise.resolve([]));
 }
 
-getPostSerializedWithReduce(ids)
+getPostSerializedWithReduce(ids).then((result) => {
+  console.log(result);
+  result.forEach((data) => {
+    console.log(data.title);
+  });
+});
 
 
 async function getPostConcurrently(array) {
@@ -54,8 +65,10 @@ async function getPostConcurrently(array) {
   console.log("waiting");
 }
 
-//  getPostConcurrently(ids)
+ getPostConcurrently(ids);
 
+// forEach isn't made to handle async requests mainly as it doesn't resolve the promise from current iteration before moving onto next iteration
+// thus ordering of resolved data is messed up
 
 function useForeach(ids) {
   ids.forEach(async (id) => {
@@ -67,4 +80,4 @@ function useForeach(ids) {
   console.log("LOGGING");
 }
 
-// useForeach(ids)
+useForeach(ids);

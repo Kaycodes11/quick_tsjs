@@ -1,11 +1,9 @@
-// unlike normal function arrow function has no context of this thus it takes from its parent scope
-
-// arrow vs normal fn: https://medium.com/@mohelsadany/arrow-functions-in-javascript-how-is-it-different-9654bde33d6a
+// arrow vs normal fn: https://www.youtube.com/watch?v=Wdlu_wlj6as&ab_channel=CodeImprove
 
 
 // Let's create a controller to manage the value of some counter when a button is pressed
 function ButtonController() {
-  // initialise the count value
+  // initialize the count value
   // here "this" is the ButtonController instance
   this.countValue = 0;
 
@@ -71,7 +69,8 @@ pokemon = {
 // first argument is this value then function's argument separately
 let bayleef = pokemonName.call(pokemon, `grass`, "vegetables");
 // first argument is this value then function's argument within array
-let bayleefi = pokemonName.apply(pokemon, [`soft grass`, "vegetables"]);
+let bayleefi = pokemonName.
+ly(pokemon, [`soft grass`, "vegetables"]);
 
 console.log(bayleef);
 console.log(bayleefi);
@@ -83,12 +82,14 @@ function Car(type, fuelType) {
   this.fuelType = fuelType;
 }
 
-function setBrand(brand) {
+function SetBrand(brand) {
   Car.call(this, "convertible", "petrol");
   // Car.apply(this, ["convertible", "petrol"]);
   this.brand = brand;
   console.log(`Car details = `, this);
 }
+
+console.info("Ferrari", new SetBrand("Ferrari"));
 
 function definePrice(price) {
   Car.call(this, "convertible", "diesel");
